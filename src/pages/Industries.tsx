@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
-import SectionHeading from "@/components/SectionHeading";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import FloatingShapes, { pageHeroShapes } from "@/components/FloatingShapes";
+import { StaggerContainer, StaggerItem } from "@/components/AnimationWrappers";
 import { Landmark, Factory, ShoppingCart, Heart, Rocket, Hotel } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -15,42 +15,51 @@ const industries = [
 
 const Industries = () => (
   <Layout>
-    <section className="page-hero pt-32 pb-16">
-      <div className="container-custom text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+    <section className="page-hero pt-32 pb-16 relative">
+      <FloatingShapes shapes={pageHeroShapes} />
+      <div className="container-custom text-center relative">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-heading text-4xl sm:text-5xl font-bold mb-4"
+          transition={{ duration: 0.4 }}
+          className="inline-block bg-gold/15 backdrop-blur-sm text-gold px-5 py-2 rounded-full text-sm font-medium mb-6 border border-gold/20"
+        >
+          Sector Expertise
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-5"
         >
           Industries We Serve
         </motion.h1>
-        <p className="text-primary-foreground/70 max-w-xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-primary-foreground/70 max-w-xl mx-auto text-lg"
+        >
           Deep sector expertise across Nepal's diverse economic landscape.
-        </p>
+        </motion.p>
       </div>
     </section>
 
     <section className="section-padding">
       <div className="container-custom">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {industries.map((ind, i) => {
-            const { ref, isVisible } = useScrollAnimation();
-            return (
-              <div
-                key={ind.title}
-                ref={ref}
-                className={`card-elevated p-8 text-center group transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className="w-16 h-16 rounded-full bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center mx-auto mb-4 transition-colors">
-                  <ind.icon className="text-accent" size={32} />
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.12}>
+          {industries.map((ind) => (
+            <StaggerItem key={ind.title} direction="scale">
+              <div className="card-elevated p-8 text-center group h-full">
+                <div className="w-18 h-18 w-[72px] h-[72px] rounded-2xl bg-accent/10 group-hover:bg-accent group-hover:shadow-lg flex items-center justify-center mx-auto mb-5 transition-all duration-500">
+                  <ind.icon className="text-accent group-hover:text-accent-foreground transition-colors duration-300" size={34} />
                 </div>
                 <h3 className="font-heading text-xl font-semibold mb-3">{ind.title}</h3>
-                <p className="text-muted-foreground text-sm">{ind.desc}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">{ind.desc}</p>
               </div>
-            );
-          })}
-        </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </div>
     </section>
   </Layout>
