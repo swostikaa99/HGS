@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import SectionHeading from "@/components/SectionHeading";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import FloatingShapes, { pageHeroShapes } from "@/components/FloatingShapes";
+import { Reveal, StaggerContainer, StaggerItem } from "@/components/AnimationWrappers";
 import { Shield, FileText, TrendingUp, Building2, BookOpen, BarChart3, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -40,63 +41,81 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const [expanded, setExpanded] = useState(false);
-  const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div
-      ref={ref}
-      className={`card-elevated overflow-hidden transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-      style={{ transitionDelay: `${index * 100}ms` }}
-    >
-      <div className="p-6">
-        <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-          <service.icon className="text-accent" size={24} />
+    <div className="card-elevated overflow-hidden group">
+      <div className="p-7">
+        <div className="w-14 h-14 rounded-xl bg-accent/10 group-hover:bg-accent/20 flex items-center justify-center mb-5 transition-all duration-300">
+          <service.icon className="text-accent group-hover:scale-110 transition-transform duration-300" size={26} />
         </div>
-        <h3 className="font-heading text-xl font-semibold mb-2">{service.title}</h3>
-        <p className="text-muted-foreground text-sm mb-4">{service.desc}</p>
-        <button
+        <h3 className="font-heading text-xl font-semibold mb-3">{service.title}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4">{service.desc}</p>
+        <motion.button
           onClick={() => setExpanded(!expanded)}
+          whileHover={{ x: 3 }}
           className="flex items-center gap-1 text-sm font-medium text-accent hover:text-accent/80 transition-colors"
         >
           {expanded ? "Show Less" : "Learn More"}
-          <ChevronDown size={16} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
-        </button>
+          <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
+            <ChevronDown size={16} />
+          </motion.div>
+        </motion.button>
       </div>
-      <div
-        className={`overflow-hidden transition-all duration-300 ${expanded ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}
+      <motion.div
+        initial={false}
+        animate={{ height: expanded ? "auto" : 0, opacity: expanded ? 1 : 0 }}
+        transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
+        className="overflow-hidden"
       >
-        <div className="px-6 pb-6 pt-0 border-t border-border">
-          <p className="text-muted-foreground text-sm leading-relaxed pt-4">{service.details}</p>
+        <div className="px-7 pb-7 pt-0 border-t border-border">
+          <p className="text-muted-foreground text-sm leading-relaxed pt-5">{service.details}</p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 const Services = () => (
   <Layout>
-    <section className="page-hero pt-32 pb-16">
-      <div className="container-custom text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+    <section className="page-hero pt-32 pb-16 relative">
+      <FloatingShapes shapes={pageHeroShapes} />
+      <div className="container-custom text-center relative">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-heading text-4xl sm:text-5xl font-bold mb-4"
+          transition={{ duration: 0.4 }}
+          className="inline-block bg-gold/15 backdrop-blur-sm text-gold px-5 py-2 rounded-full text-sm font-medium mb-6 border border-gold/20"
+        >
+          What We Offer
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-5"
         >
           Our Services
         </motion.h1>
-        <p className="text-primary-foreground/70 max-w-xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-primary-foreground/70 max-w-xl mx-auto text-lg"
+        >
           Comprehensive financial solutions designed to help your business thrive.
-        </p>
+        </motion.p>
       </div>
     </section>
 
     <section className="section-padding">
       <div className="container-custom">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.12}>
           {services.map((s, i) => (
-            <ServiceCard key={s.title} service={s} index={i} />
+            <StaggerItem key={s.title}>
+              <ServiceCard service={s} index={i} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   </Layout>

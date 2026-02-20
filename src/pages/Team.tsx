@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
-import SectionHeading from "@/components/SectionHeading";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import FloatingShapes, { pageHeroShapes } from "@/components/FloatingShapes";
+import { StaggerContainer, StaggerItem } from "@/components/AnimationWrappers";
 import { Users, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -15,51 +15,73 @@ const teamMembers = [
 
 const Team = () => (
   <Layout>
-    <section className="page-hero pt-32 pb-16">
-      <div className="container-custom text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+    <section className="page-hero pt-32 pb-16 relative">
+      <FloatingShapes shapes={pageHeroShapes} />
+      <div className="container-custom text-center relative">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-heading text-4xl sm:text-5xl font-bold mb-4"
+          transition={{ duration: 0.4 }}
+          className="inline-block bg-gold/15 backdrop-blur-sm text-gold px-5 py-2 rounded-full text-sm font-medium mb-6 border border-gold/20"
         >
-          Our Team
+          Our People
+        </motion.div>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold mb-5"
+        >
+          Meet the Team
         </motion.h1>
-        <p className="text-primary-foreground/70 max-w-xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-primary-foreground/70 max-w-xl mx-auto text-lg"
+        >
           Meet the professionals behind HGS & Associates.
-        </p>
+        </motion.p>
       </div>
     </section>
 
     <section className="section-padding">
       <div className="container-custom">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {teamMembers.map((m, i) => {
-            const { ref, isVisible } = useScrollAnimation();
-            return (
-              <div
-                key={m.name}
-                ref={ref}
-                className={`card-elevated p-6 text-center group transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className="w-24 h-24 rounded-full bg-muted flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform">
-                  <Users className="text-muted-foreground" size={36} />
-                </div>
+        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.12}>
+          {teamMembers.map((m) => (
+            <StaggerItem key={m.name} direction="scale">
+              <div className="card-elevated p-7 text-center group">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  className="w-28 h-28 rounded-full bg-muted flex items-center justify-center mx-auto mb-5 ring-4 ring-accent/10 group-hover:ring-accent/30 transition-all duration-500"
+                >
+                  <Users className="text-muted-foreground" size={40} />
+                </motion.div>
                 <h3 className="font-heading text-lg font-semibold">{m.name}</h3>
                 <p className="text-accent text-sm font-medium mb-3">{m.role}</p>
-                <p className="text-muted-foreground text-sm mb-4">{m.bio}</p>
+                <p className="text-muted-foreground text-sm mb-5">{m.bio}</p>
                 <div className="flex justify-center gap-3">
-                  <button className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-accent/20 transition-colors" aria-label="LinkedIn">
-                    <Linkedin size={14} className="text-muted-foreground" />
-                  </button>
-                  <button className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-accent/20 transition-colors" aria-label="Email">
-                    <Mail size={14} className="text-muted-foreground" />
-                  </button>
+                  <motion.button
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 rounded-full bg-muted flex items-center justify-center hover:bg-accent/20 transition-colors"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin size={15} className="text-muted-foreground" />
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-9 h-9 rounded-full bg-muted flex items-center justify-center hover:bg-accent/20 transition-colors"
+                    aria-label="Email"
+                  >
+                    <Mail size={15} className="text-muted-foreground" />
+                  </motion.button>
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
       </div>
     </section>
   </Layout>
