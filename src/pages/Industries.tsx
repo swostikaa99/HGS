@@ -1,16 +1,84 @@
 import Layout from "@/components/Layout";
 import FloatingShapes, { pageHeroShapes } from "@/components/FloatingShapes";
 import { StaggerContainer, StaggerItem } from "@/components/AnimationWrappers";
-import { Landmark, Factory, ShoppingCart, Heart, Rocket, Hotel } from "lucide-react";
+import {
+  Landmark,
+  Factory,
+  ShoppingCart,
+  Heart,
+  Rocket,
+  Hotel,
+  CheckCircle,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const industries = [
-  { icon: Landmark, title: "Banking & Finance", desc: "Specialized audit, compliance, and advisory services for financial institutions, banks, and microfinance companies." },
-  { icon: Factory, title: "Manufacturing", desc: "Cost accounting, statutory audits, and operational efficiency consulting for manufacturing businesses." },
-  { icon: ShoppingCart, title: "Retail", desc: "Inventory management advisory, tax planning, and financial reporting for retail enterprises." },
-  { icon: Heart, title: "NGOs / INGOs", desc: "Project audits, donor compliance reporting, and financial management for non-profit organizations." },
-  { icon: Rocket, title: "Startups", desc: "Business registration, financial structuring, and growth advisory for emerging businesses." },
-  { icon: Hotel, title: "Hospitality", desc: "Revenue audit, tax compliance, and financial consulting for hotels, resorts, and tourism businesses." },
+  {
+    icon: Landmark,
+    title: "Banking & Finance",
+    desc: "Specialized audit, compliance, and advisory services for financial institutions, banks, and microfinance companies.",
+    services: [
+      "Regulatory Compliance Audits",
+      "Risk Assessment",
+      "Financial Reporting",
+      "Internal Controls Review",
+    ],
+  },
+  {
+    icon: Factory,
+    title: "Manufacturing",
+    desc: "Cost accounting, statutory audits, and operational efficiency consulting for manufacturing businesses.",
+    services: [
+      "Cost Accounting",
+      "Production Audits",
+      "Supply Chain Advisory",
+      "Quality Assurance",
+    ],
+  },
+  {
+    icon: ShoppingCart,
+    title: "Retail & Trade",
+    desc: "Inventory management advisory, tax planning, and financial reporting for retail enterprises.",
+    services: [
+      "Inventory Audits",
+      "Tax Planning",
+      "Sales Analysis",
+      "Expansion Strategy",
+    ],
+  },
+  {
+    icon: Heart,
+    title: "NGOs / INGOs",
+    desc: "Project audits, donor compliance reporting, and financial management for non-profit organizations.",
+    services: [
+      "Project Audits",
+      "Donor Reporting",
+      "Grant Management",
+      "Compliance Audits",
+    ],
+  },
+  {
+    icon: Rocket,
+    title: "Startups & SMEs",
+    desc: "Business registration, financial structuring, and growth advisory for emerging businesses.",
+    services: [
+      "Business Setup",
+      "Financial Planning",
+      "Growth Strategy",
+      "Funding Support",
+    ],
+  },
+  {
+    icon: Hotel,
+    title: "Hospitality & Tourism",
+    desc: "Revenue audit, tax compliance, and financial consulting for hotels, resorts, and tourism businesses.",
+    services: [
+      "Revenue Audits",
+      "Occupancy Analysis",
+      "Tax Compliance",
+      "Profitability Review",
+    ],
+  },
 ];
 
 const Industries = () => (
@@ -45,18 +113,55 @@ const Industries = () => (
       </div>
     </section>
 
-    <section className="section-padding">
+    <section className="section-padding bg-primary-foreground/5">
       <div className="container-custom">
-        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.12}>
+        <StaggerContainer
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          staggerDelay={0.12}
+        >
           {industries.map((ind) => (
             <StaggerItem key={ind.title} direction="scale">
-              <div className="card-elevated p-8 text-center group h-full">
-                <div className="w-18 h-18 w-[72px] h-[72px] rounded-2xl bg-accent/10 group-hover:bg-accent group-hover:shadow-lg flex items-center justify-center mx-auto mb-5 transition-all duration-500">
-                  <ind.icon className="text-accent group-hover:text-accent-foreground transition-colors duration-300" size={34} />
+              <motion.div
+                whileHover={{ y: -8 }}
+                className="card-elevated p-8 group h-full flex flex-col relative overflow-hidden"
+              >
+                {/* Golden gradient top line */}
+                <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-gold via-accent to-gold opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-18 h-18 w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-accent/20 to-accent/10 group-hover:from-accent group-hover:to-accent/80 group-hover:shadow-lg flex items-center justify-center mx-auto mb-5 transition-all duration-500 relative z-10">
+                  <ind.icon
+                    className="text-accent group-hover:text-accent-foreground transition-colors duration-300"
+                    size={34}
+                  />
                 </div>
-                <h3 className="font-heading text-xl font-semibold mb-3">{ind.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{ind.desc}</p>
-              </div>
+                <h3 className="font-heading text-xl font-semibold mb-3 relative z-10">
+                  {ind.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4 relative z-10 flex-grow">
+                  {ind.desc}
+                </p>
+
+                <div className="space-y-2 relative z-10 pt-4 border-t border-accent/20">
+                  <p className="text-xs font-semibold text-accent uppercase tracking-wide mb-3">
+                    Our Services
+                  </p>
+                  {ind.services.map((service, idx) => (
+                    <motion.div
+                      key={service}
+                      className="flex items-start gap-2 text-sm text-primary group-hover:text-gold transition-colors"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 }}
+                    >
+                      <CheckCircle
+                        size={14}
+                        className="text-accent mt-0.5 shrink-0"
+                      />
+                      {service}
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
             </StaggerItem>
           ))}
         </StaggerContainer>

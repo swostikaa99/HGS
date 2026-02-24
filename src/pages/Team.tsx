@@ -5,12 +5,36 @@ import { Users, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 const teamMembers = [
-  { name: "CA Hari Prasad Gyawali", role: "Managing Partner", bio: "Fellow member of ICAN with 18+ years of experience in audit, tax, and advisory." },
-  { name: "CA Sita Devi Sharma", role: "Senior Partner", bio: "Specializes in tax advisory and compliance with expertise in international taxation." },
-  { name: "CA Ramesh Adhikari", role: "Audit Director", bio: "Leads our audit practice with a focus on financial institutions and manufacturing." },
-  { name: "CA Priya Basnet", role: "Tax Manager", bio: "Expert in corporate tax planning, VAT compliance, and transfer pricing." },
-  { name: "Bikash Khadka", role: "Senior Associate", bio: "Experienced in financial consulting and business registration services." },
-  { name: "Anita Gurung", role: "Associate", bio: "Focused on bookkeeping, payroll processing, and management reporting." },
+  {
+    name: "CA Hari Prasad Gyawali",
+    role: "Managing Partner",
+    bio: "Fellow member of ICAN with 18+ years of experience in audit, tax, and advisory.",
+  },
+  {
+    name: "CA Sita Devi Sharma",
+    role: "Senior Partner",
+    bio: "Specializes in tax advisory and compliance with expertise in international taxation.",
+  },
+  {
+    name: "CA Ramesh Adhikari",
+    role: "Audit Director",
+    bio: "Leads our audit practice with a focus on financial institutions and manufacturing.",
+  },
+  {
+    name: "CA Priya Basnet",
+    role: "Tax Manager",
+    bio: "Expert in corporate tax planning, VAT compliance, and transfer pricing.",
+  },
+  {
+    name: "Bikash Khadka",
+    role: "Senior Associate",
+    bio: "Experienced in financial consulting and business registration services.",
+  },
+  {
+    name: "Anita Gurung",
+    role: "Associate",
+    bio: "Focused on bookkeeping, payroll processing, and management reporting.",
+  },
 ];
 
 const Team = () => (
@@ -47,7 +71,10 @@ const Team = () => (
 
     <section className="section-padding">
       <div className="container-custom">
-        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.12}>
+        <StaggerContainer
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          staggerDelay={0.12}
+        >
           {teamMembers.map((m) => (
             <StaggerItem key={m.name} direction="scale">
               <div className="card-elevated p-7 text-center group">
@@ -67,7 +94,7 @@ const Team = () => (
                     className="w-9 h-9 rounded-full bg-muted flex items-center justify-center hover:bg-accent/20 transition-colors"
                     aria-label="LinkedIn"
                   >
-                    <Linkedin size={15} className="text-muted-foreground" />
+                    <Linkedin size={15} className="text-blue-700 " />
                   </motion.button>
                   <motion.button
                     whileHover={{ scale: 1.15 }}
@@ -75,7 +102,7 @@ const Team = () => (
                     className="w-9 h-9 rounded-full bg-muted flex items-center justify-center hover:bg-accent/20 transition-colors"
                     aria-label="Email"
                   >
-                    <Mail size={15} className="text-muted-foreground" />
+                    <Mail size={15} className="text-red-700" />
                   </motion.button>
                 </div>
               </div>

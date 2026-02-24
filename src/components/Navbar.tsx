@@ -11,7 +11,6 @@ const navLinks = [
   { name: "Team", path: "/team" },
   { name: "Insights", path: "/blog" },
   { name: "Careers", path: "/careers" },
-  { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -30,9 +29,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-primary/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+        scrolled ? "bg-primary/95 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
       <div className="container-custom flex items-center justify-between h-16 lg:h-20">
@@ -57,7 +54,10 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <Link to="/contact" className="btn-accent text-sm flex items-center gap-2 py-2 px-4">
+          <Link
+            to="/contact"
+            className="btn-accent text-sm flex items-center gap-2 py-2 px-4"
+          >
             <Phone size={14} />
             Get in Touch
           </Link>
