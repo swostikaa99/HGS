@@ -153,8 +153,9 @@ const ApplicationModal = ({
             <>
               <h2 className="text-2xl font-bold mb-1">Apply for Position</h2>
               {jobTitle && (
-                <p className="text-primary text-sm mb-6">{jobTitle}</p>
+                <p className="text-primary text-sm font-semibold">{jobTitle}</p>
               )}
+              <hr className=" mb-6" />
 
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
@@ -169,7 +170,7 @@ const ApplicationModal = ({
                       setFormData({ ...formData, name: e.target.value })
                     }
                     placeholder="John Doe"
-                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
                   />
                 </div>
 
@@ -185,7 +186,7 @@ const ApplicationModal = ({
                       setFormData({ ...formData, email: e.target.value })
                     }
                     placeholder="john@example.com"
-                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
                   />
                 </div>
 
@@ -201,7 +202,7 @@ const ApplicationModal = ({
                       setFormData({ ...formData, phone: e.target.value })
                     }
                     placeholder="+977 98..."
-                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
                   />
                 </div>
 
@@ -217,7 +218,7 @@ const ApplicationModal = ({
                     }
                     placeholder="Tell us why you're interested in this position..."
                     rows={4}
-                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all resize-none"
+                    className="w-full px-4 py-2 rounded-lg bg-primary-foreground/10 border border-primary text-primary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent transition-all resize-none"
                   />
                 </div>
 

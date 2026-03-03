@@ -10,6 +10,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import path from "path";
 
 const Footer = () => (
   <footer className="bg-gradient-to-b from-navy-dark to-navy-dark/95 text-primary-foreground relative overflow-hidden">
@@ -94,7 +95,6 @@ const Footer = () => (
               { name: "Industries", path: "/industries" },
               { name: "Team", path: "/team" },
               { name: "Careers", path: "/careers" },
-              { name: "Blog", path: "/blog" },
             ].map((link) => (
               <motion.div
                 key={link.path}
@@ -124,14 +124,17 @@ const Footer = () => (
           <h4 className="font-heading text-lg font-semibold mb-4">Services</h4>
           <div className="flex flex-col gap-3 text-sm text-primary-foreground/70">
             {[
-              "Audit & Assurance",
-              "Tax Advisory",
-              "Financial Consulting",
-              "Business Registration",
-              "Risk Management",
+              { name: "Audit & Assurance", path: "/services/audit" },
+              { name: "Tax Advisory", path: "/services/tax" },
+              { name: "Financial Consulting", path: "/services/financial" },
+              {
+                name: "Business Registration",
+                path: "/services/business-registration",
+              },
+              { name: "Risk Management", path: "/services/risk-management" },
             ].map((service) => (
               <motion.div
-                key={service}
+                key={service.path}
                 className="group flex items-center gap-2"
                 whileHover={{ x: 4 }}
               >
@@ -143,9 +146,12 @@ const Footer = () => (
                 >
                   <ChevronRight size={14} />
                 </motion.span>
-                <span className="group-hover:text-gold transition-colors">
-                  {service}
-                </span>
+                <Link
+                  to={service.path}
+                  className="group-hover:text-gold transition-colors"
+                >
+                  {service.name}
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -164,7 +170,7 @@ const Footer = () => (
             </div>
             <div className="flex items-center gap-2">
               <Mail size={16} className="text-gold shrink-0" />
-              <span>info@pppradhan.com</span>
+              <span>info@hgsassociates.com</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock size={16} className="text-gold shrink-0" />

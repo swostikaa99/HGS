@@ -328,7 +328,6 @@ const Terms = () => (
           </Reveal>
         </div>
 
-        {/* ── CONTACT SECTION ──────────────────────────────────────── */}
         <div className="mt-16 max-w-6xl mx-auto">
           <Reveal direction="scale">
             <motion.div
@@ -366,7 +365,6 @@ const Terms = () => (
           </Reveal>
         </div>
 
-        {/* ── FOOTER NOTE ──────────────────────────────────────────── */}
         <div className="mt-16 text-center max-w-6xl mx-auto">
           <Reveal direction="up">
             <div className="border-t border-border/40 pt-8">

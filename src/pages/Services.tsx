@@ -5,6 +5,7 @@ import {
   Reveal,
   StaggerContainer,
   StaggerItem,
+  MagneticButton,
 } from "@/components/AnimationWrappers";
 import {
   Shield,
@@ -14,9 +15,13 @@ import {
   BookOpen,
   BarChart3,
   ChevronDown,
+  Target,
+  ChevronRight,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import serviceImage from "@/assets/service.png";
 
 const services = [
   {
@@ -152,7 +157,37 @@ const Services = () => (
       </div>
     </section>
 
-    <section className="section-padding">
+    {/* Featured Services Image Section */}
+    <section className="section-padding ">
+      <div className="container-custom">
+        <Reveal direction="left" delay={0.2}>
+          <div className="relative overflow-hidden rounded-2xl">
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-gold/20 pointer-events-none z-10" />
+
+            {/* Golden border effect */}
+            <div className="absolute inset-0 border-2 border-gradient-to-r from-gold via-accent to-gold opacity-40 rounded-2xl pointer-events-none z-20" />
+
+            {/* Image */}
+            <motion.img
+              src={serviceImage}
+              alt="Our Services"
+              className="w-full h-90 rounded-2xl shadow-2xl"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            />
+
+            {/* Floating accent shapes */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-accent/30 to-gold/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-gold/30 to-accent/20 rounded-full blur-3xl pointer-events-none" />
+          </div>
+        </Reveal>
+      </div>
+    </section>
+
+    <section className="section-padding -mt-20">
       <div className="container-custom">
         <StaggerContainer
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -164,6 +199,87 @@ const Services = () => (
             </StaggerItem>
           ))}
         </StaggerContainer>
+      </div>
+    </section>
+
+    {/* CTA Section */}
+    <section className="bg-gradient-to-br from-navy-dark via-navy to-navy-dark section-padding relative overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-40 -left-40 w-96 h-96 bg-gradient-to-br from-accent/20 to-transparent rounded-full blur-3xl"
+          animate={{ y: [0, 40, 0], x: [0, 40, 0] }}
+          transition={{ duration: 25, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute -bottom-40 -right-40 w-96 h-96 bg-gradient-to-br from-yellow-400/15 to-transparent rounded-full blur-3xl"
+          animate={{ y: [0, -40, 0], x: [0, -40, 0] }}
+          transition={{ duration: 30, repeat: Infinity }}
+        />
+      </div>
+      <FloatingShapes
+        shapes={[
+          {
+            variant: "circle",
+            size: 100,
+            x: 10,
+            y: 20,
+            delay: 0,
+            duration: 9,
+            className: "opacity-10",
+          },
+          {
+            variant: "ring",
+            size: 150,
+            x: 85,
+            y: 50,
+            delay: 1,
+            duration: 11,
+            className: "opacity-10",
+          },
+          {
+            variant: "diamond",
+            size: 40,
+            x: 70,
+            y: 15,
+            delay: 2,
+            duration: 8,
+          },
+        ]}
+      />
+      <div className="container-custom text-center relative z-10">
+        <Reveal direction="scale">
+          <motion.h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-foreground mb-5 leading-tight">
+            Ready to Transform Your{" "}
+            <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-yellow-300 to-orange-400">
+              Financial Future?
+            </motion.span>
+          </motion.h2>
+        </Reveal>
+        <Reveal direction="up" delay={0.15}>
+          <p className="text-primary-foreground/70 mb-10 max-w-xl mx-auto text-lg font-light tracking-wide">
+            Our expert team is ready to provide tailored solutions for your
+            business needs.
+          </p>
+        </Reveal>
+        <Reveal direction="up" delay={0.3}>
+          <MagneticButton>
+            <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                to="/contact"
+                className="btn-accent inline-flex items-center gap-2 shadow-2xl hover:shadow-3xl hover:shadow-accent/50 transition-all duration-300"
+              >
+                <span className="flex items-center gap-2">
+                  <Target size={18} />
+                  Get Started Today
+                </span>
+                <ChevronRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </Link>
+            </motion.div>
+          </MagneticButton>
+        </Reveal>
       </div>
     </section>
   </Layout>

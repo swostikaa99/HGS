@@ -59,7 +59,7 @@ const Privacy = () => (
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-primary max-w-2xl mx-auto text-lg"
+          className="text-primary max-w-6xl mx-auto text-lg"
         >
           We are committed to protecting your privacy and ensuring transparency
           about how we handle your data.
@@ -74,7 +74,7 @@ const Privacy = () => (
 
       <div className="container-custom relative">
         {/* ── INTRODUCTION SECTION ─────────────────────────────────── */}
-        <div className="max-w-3xl mx-auto mb-16">
+        <div className="max-w-6xl mx-auto mb-16">
           <Reveal direction="up">
             <div className="relative rounded-2xl border border-border/60 bg-card/50 backdrop-blur-sm p-8 sm:p-10 hover:border-accent/40 transition-all duration-500 group overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -173,7 +173,7 @@ const Privacy = () => (
             </div>
           </Reveal>
 
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <StaggerContainer className="space-y-3" staggerDelay={0.05}>
               {[
                 "Deliver requested services and send related information",
@@ -203,7 +203,7 @@ const Privacy = () => (
         </div>
 
         {/* ── OTHER SECTIONS ───────────────────────────────────────── */}
-        <div className="max-w-3xl mx-auto space-y-12">
+        <div className="max-w-6xl mx-auto space-y-12">
           {[
             {
               num: "4",
